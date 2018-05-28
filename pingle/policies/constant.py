@@ -1,6 +1,6 @@
+from pingle.core.policy import Policy
 
-
-class ConstantPolicy:
+class ConstantPolicy(Policy):
     action = None
     def get_action(self, *,
                    observation,

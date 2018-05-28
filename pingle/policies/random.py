@@ -1,5 +1,8 @@
 import numpy as np
 
+from pingle.core.policy import Policy
+
+
 class RandomPolicy:
     actions = []
     def get_action(self, *,

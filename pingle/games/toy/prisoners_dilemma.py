@@ -1,10 +1,10 @@
-from pingle import registry_acts
+from pingle import registry
 from pingle.games.simultaneous_game import SimultaneousOneRoundGame
 from pingle.policies.constant import ConstantPolicy
 from pingle.policies.random import RandomPolicy
 from pingle.core.speech_acts import (
     SpeechActTable, SpeechActMatrix, ConditionalSpeechAct)
-from pingle.personas import TabularPersona
+from pingle.personas.tabular_persona import TabularPersona
 
 @registry.register_game('v0')
 class SimplePrisonersDilemma(SimultaneousOneRoundGame):
