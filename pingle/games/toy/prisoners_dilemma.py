@@ -1,43 +1,45 @@
 
-
-from pingle.games.game import Game
+from pingle import registry
+from pingle.games.simultaneous_game import SimultaneousOneRoundGame
 from pingle.policies.constant import ConstantPolicy
+from pingle.policies.random import RandomPolicy
 
-class SimplePrisonersDilemma(Game):
-    def __init__(self):
-        self.actions = {0: None, 1: None}
+@registry.register_game('v0')
+class SimplePrisonersDilemma(SimultaneousOneRoundGame):
+    player_names = ['player1', 'player2']
+    actions = ['cooperate', 'defect']
 
-    def _done(self):
-        return not (None in self.actions.values())
-        
-    def step(self, *, player_id, policy, duration):
-        # the case that some player still has to move
-        if not self._done():
-            # get action
-            action = policy.get_action(observation=0,
-                                       previous_reward=0.0,
-                                       public_speech=[])
+    payoff_matrix = {
+        ('cooperate', 'cooperate'): (7, 7),
+        ('cooperate', 'defect'): (0, 10),
+        ('defect', 'cooperate'): (10, 0),
+        ('defect', 'defect'): (3, 3),
+    }
 
-            # normalize action
-            action = self.normalize_action(action)
-
-            # validate input
-            assert action in ['cooperate', 'defect']
-            assert player_id in [0, 1]
-            assert duration >= 0.0
-
-            self.actions[player_id] = action
-
-        else:
-            pass
-
-    def observe(self):
-        if 
-
-
-class CooperatePolicy(ConstantPolicy):
-    action = 'cooperate'
+    safety_payoff_matrix = {
+        ('cooperate', 'cooperate'): (1, 1),
+        ('cooperate', 'defect'): (1, 0),
+        ('defect', 'cooperate'): (0, 1),
+        ('defect', 'defect'): (0, 0),
+    }
     
-class DefectPolicy(ConstantPolicy):
+        
+@registry.register_strategy(SimplePrisonersDilemma, 'v0')
+class Cooperate(ConstantPolicy):
+    action = 'cooperate'
+
+    speech_act_matrix = {
+        ('cooperate', 'cooperate'): (1, 1),
+        ('cooperate', 'defect'): (1, 0),
+        ('defect', 'cooperate'): (0, 1),
+        ('defect', 'defect'): (0, 0),
+    }
+    
+@registry.register_strategy(SimplePrisonersDilemma, 'v0')    
+class Defect(ConstantPolicy):
     action = 'defect'
+
+@registry.register_strategy(SimplePrisonersDilemma, 'v0')    
+class Random(RandomPolicy):
+    actions = ['cooperate', 'defect']
 

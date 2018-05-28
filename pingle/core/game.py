@@ -6,11 +6,11 @@ class Game:
     def __init__(self):
         pass
 
+    @abc.abstractmethod
     def play(self, **players):
         """
         """
-
-        return 'fleventy-seven'
+        pass
         
     @abc.abstractmethod
     def step(self, *
@@ -29,3 +29,12 @@ class Game:
             additional instruction.
         """
         pass
+
+    @abc.abstractmethod
+    def done(self):
+        pass
+
+    @abc.abstractmethod
+    def results(self):
+        pass
+    
