@@ -1,7 +1,7 @@
 
-from pingle.games.game import Game
+from pingle import game
 
-class TurnBasedGame(Game):
+class TurnBasedGame(game.Game):
     player_names = []
 
     def play(self, **players):

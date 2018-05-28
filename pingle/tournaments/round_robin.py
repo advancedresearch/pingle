@@ -2,9 +2,9 @@ from collections import defaultdict
 
 import numpy as np
 
-from pingle.tournaments.tournament import Tournament
+from pingle import tournament
 
-class RoundRobinTwoPlayerTournament(Tournament):
+class RoundRobinTwoPlayerTournament(tournament.Tournament):
     def __init__(self, *,
                  games,
                  strategies):

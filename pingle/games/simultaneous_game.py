@@ -1,5 +1,5 @@
 from pingle.games.turn_based_game import TurnBasedGame
-from pingle.results import GameResults
+from pingle import results
 
 class SimultaneousOneRoundGame(TurnBasedGame):
     def __init__(self):
@@ -39,7 +39,7 @@ class SimultaneousOneRoundGame(TurnBasedGame):
 
     def results(self, player_name):
         player_id = self.player_names.index(player_name)
-        return GameResults(
+        return results.GameResults(
             cumulative_reward=
             self._rewards_received[player_id],
             cumulative_safety_reward=
